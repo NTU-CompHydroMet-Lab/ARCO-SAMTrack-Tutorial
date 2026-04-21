@@ -294,26 +294,33 @@ def draw_cdf(day, out_png):
 def draw_timeseries(out_png):
     """Standalone time-series: basin-mean tagged precip for the full month.
 
-    Bar colour encodes pre-/post-event vs active window. A dashed red line
-    marks the event onset (night of 2011-01-11, Nova Friburgo landslides).
-    The peak day is annotated with its value.
+    Step + fill hybrid — step line preserves the daily discretisation while
+    the filled area conveys the event's temporal envelope. The event window
+    is shaded more strongly than the surrounding precursor / recovery days.
+    Red dashed line marks the 2011-01-11 onset; peak day is annotated.
     """
     import matplotlib.dates as mdates
 
     fig, ax = plt.subplots(figsize=(16, 5))
 
-    # Colour the bars: pre-onset = grey, event window = steelblue, post = grey.
+    times = tp_basin_mean.time.values
+    values = tp_basin_mean.values
     onset = np.datetime64(EVENT_ONSET)
     active_end = np.datetime64(DATE_END)
-    times = tp_basin_mean.time.values
-    bar_colors = [
-        "steelblue" if (onset <= t <= active_end) else "lightgrey"
-        for t in times
-    ]
-    ax.bar(times, tp_basin_mean.values, width=0.85,
-           color=bar_colors, edgecolor="black", linewidth=0.4)
+    active_mask = (times >= onset) & (times <= active_end)
 
-    # Onset line — label near y-axis middle so it doesn't collide with peak.
+    # Full month: light fill under the step curve.
+    ax.fill_between(times, 0, values, step="mid",
+                    color="steelblue", alpha=0.25, linewidth=0)
+    # Event window: darker fill to emphasise the active period.
+    ax.fill_between(times, 0, values, step="mid",
+                    where=active_mask,
+                    color="steelblue", alpha=0.7, linewidth=0)
+    # Black step outline.
+    ax.step(times, values, where="mid",
+            color="black", linewidth=1.2, zorder=3)
+
+    # Onset line — label at mid-height to avoid the peak annotation.
     ax.axvline(onset, color="crimson", linestyle="--", linewidth=2, zorder=5)
     ax.annotate(
         f"event onset\n{EVENT_ONSET}",
@@ -322,13 +329,13 @@ def draw_timeseries(out_png):
         color="crimson", fontsize=14, ha="left", va="center", fontweight="bold",
     )
 
-    # Annotate the peak day.
-    peak_idx = int(np.argmax(tp_basin_mean.values))
+    # Peak annotation.
+    peak_idx = int(np.argmax(values))
     peak_time = times[peak_idx]
-    peak_val = float(tp_basin_mean.values[peak_idx])
+    peak_val = float(values[peak_idx])
     ax.annotate(
         f"peak {peak_val:.1f}\n{str(peak_time)[:10]}",
-        xy=(peak_time, peak_val), xytext=(0, 10),
+        xy=(peak_time, peak_val), xytext=(0, 12),
         textcoords="offset points",
         ha="center", va="bottom", fontsize=13,
         arrowprops=dict(arrowstyle="-", color="black", lw=0.6),
@@ -341,7 +348,6 @@ def draw_timeseries(out_png):
         "Tagged precipitation over the Serra do Mar box, January 2011"
     )
 
-    # Daily x-ticks, every 3 days labelled, clean date formatter.
     ax.xaxis.set_major_locator(mdates.DayLocator(interval=3))
     ax.xaxis.set_minor_locator(mdates.DayLocator())
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
