@@ -256,6 +256,13 @@ def draw_pdf(day, out_png):
 
 
 def draw_cdf(day, out_png):
+    """Spatial rank-CDF, normalised per day.
+
+    Each frame is independently normalised to its own daily total, so the
+    colourbar answers "which pixels constitute the top X% of *today's*
+    source?", not "which pixels are strongest across the whole month?".
+    Compare abs frames for absolute strength.
+    """
     tp_day = float(tp_basin_mean.sel(time=day))
     fig, ax = _map_figure()
     da = e_cdf.sel(time=day)
@@ -272,7 +279,9 @@ def draw_cdf(day, out_png):
     )
     _base_map(ax)
     ax.set_title(
-        f"{day}  |  box mean tagged precip = {tp_day:.1f} kg m⁻² day⁻¹"
+        f"{day}  |  box mean tagged precip = {tp_day:.1f} kg m⁻² day⁻¹\n"
+        f"cumulative source percentile (normalised per-day)",
+        fontsize=14,
     )
     cb = fig.colorbar(cf, ax=ax, shrink=0.8, pad=0.02,
                       ticks=CDF_LEVELS + [100])
@@ -285,30 +294,64 @@ def draw_cdf(day, out_png):
 def draw_timeseries(out_png):
     """Standalone time-series: basin-mean tagged precip for the full month.
 
-    A dashed red line marks the event onset (night of 2011-01-11, when the
-    landslide sequence in Nova Friburgo / Teresópolis began).
+    Bar colour encodes pre-/post-event vs active window. A dashed red line
+    marks the event onset (night of 2011-01-11, Nova Friburgo landslides).
+    The peak day is annotated with its value.
     """
-    fig, ax = plt.subplots(figsize=(16, 4.5), constrained_layout=True)
-    ax.bar(tp_basin_mean.time.values, tp_basin_mean.values,
-           width=0.8, color="steelblue", edgecolor="black", linewidth=0.3)
+    import matplotlib.dates as mdates
 
-    # Mark the event onset with a vertical dashed line + annotation.
+    fig, ax = plt.subplots(figsize=(16, 5))
+
+    # Colour the bars: pre-onset = grey, event window = steelblue, post = grey.
     onset = np.datetime64(EVENT_ONSET)
+    active_end = np.datetime64(DATE_END)
+    times = tp_basin_mean.time.values
+    bar_colors = [
+        "steelblue" if (onset <= t <= active_end) else "lightgrey"
+        for t in times
+    ]
+    ax.bar(times, tp_basin_mean.values, width=0.85,
+           color=bar_colors, edgecolor="black", linewidth=0.4)
+
+    # Onset line — label near y-axis middle so it doesn't collide with peak.
     ax.axvline(onset, color="crimson", linestyle="--", linewidth=2, zorder=5)
     ax.annotate(
         f"event onset\n{EVENT_ONSET}",
-        xy=(onset, TP_YMAX * 0.95), xytext=(10, -6),
+        xy=(onset, TP_YMAX * 0.55), xytext=(8, 0),
         textcoords="offset points",
-        color="crimson", fontsize=13, ha="left", va="top",
+        color="crimson", fontsize=14, ha="left", va="center", fontweight="bold",
+    )
+
+    # Annotate the peak day.
+    peak_idx = int(np.argmax(tp_basin_mean.values))
+    peak_time = times[peak_idx]
+    peak_val = float(tp_basin_mean.values[peak_idx])
+    ax.annotate(
+        f"peak {peak_val:.1f}\n{str(peak_time)[:10]}",
+        xy=(peak_time, peak_val), xytext=(0, 10),
+        textcoords="offset points",
+        ha="center", va="bottom", fontsize=13,
+        arrowprops=dict(arrowstyle="-", color="black", lw=0.6),
     )
 
     ax.set_ylim(0, TP_YMAX)
     ax.set_ylabel("Box-mean tagged precipitation\n[kg m⁻² day⁻¹]")
+    ax.set_xlabel("")
     ax.set_title(
         "Tagged precipitation over the Serra do Mar box, January 2011"
     )
-    ax.tick_params(axis="x", rotation=30)
-    ax.grid(axis="y", alpha=0.3)
+
+    # Daily x-ticks, every 3 days labelled, clean date formatter.
+    ax.xaxis.set_major_locator(mdates.DayLocator(interval=3))
+    ax.xaxis.set_minor_locator(mdates.DayLocator())
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
+    ax.tick_params(axis="x", rotation=0)
+
+    ax.grid(axis="y", alpha=0.3, linewidth=0.5)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    fig.tight_layout()
     fig.savefig(out_png, dpi=300, pad_inches=0.1, facecolor="white")
     plt.close(fig)
 
