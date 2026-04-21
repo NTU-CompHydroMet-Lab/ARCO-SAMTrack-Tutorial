@@ -10,6 +10,7 @@
   Outputs:  outputs/box_abs/<YYYY-MM-DD>.png   — absolute source strength
             outputs/box_pdf/<YYYY-MM-DD>.png   — area-weighted PDF
             outputs/box_cdf/<YYYY-MM-DD>.png   — cumulative-rank % contours
+            outputs/box_tagged_precip_jan2011.png  — one time-series (context)
 
   Version: v2 (2026-04-21)
 ================================================================================
@@ -65,6 +66,7 @@ SHP = "data/hybas_sa_lev02_v1c/hybas_sa_lev02_v1c.shp"
 OUT_ABS = Path("outputs/box_abs"); OUT_ABS.mkdir(parents=True, exist_ok=True)
 OUT_PDF = Path("outputs/box_pdf"); OUT_PDF.mkdir(parents=True, exist_ok=True)
 OUT_CDF = Path("outputs/box_cdf"); OUT_CDF.mkdir(parents=True, exist_ok=True)
+OUT_TS = Path("outputs/box_tagged_precip_jan2011.png")
 
 # Serra do Mar box.
 BOX_LAT_S, BOX_LAT_N = -23.5, -21.5
@@ -73,6 +75,7 @@ BOX_LON_W, BOX_LON_E = -44.0, -41.0
 DATE_START = "2011-01-05"
 DATE_END = "2011-01-22"
 JAN_START, JAN_END = "2011-01-01", "2011-01-31"
+EVENT_ONSET = "2011-01-11"  # night of 11→12 Jan 2011: Nova Friburgo landslides begin
 
 # CDF contour levels (percent of cumulative source captured).
 CDF_LEVELS = [10, 30, 50, 70, 90]
@@ -200,25 +203,16 @@ def _base_map(ax):
     gl.ylabel_style = {"size": 14}
 
 
-def _tp_bar(ax, day):
-    """Bottom strip: January tagged-precip bar chart, current day highlighted."""
-    bar_colors = ["steelblue"] * len(tp_basin_mean)
-    idx = int(np.where(tp_basin_mean.time.values == np.datetime64(day))[0][0])
-    bar_colors[idx] = "crimson"
-    ax.bar(tp_basin_mean.time.values, tp_basin_mean.values,
-           width=0.8, color=bar_colors, edgecolor="black", linewidth=0.3)
-    ax.set_ylim(0, TP_YMAX)
-    ax.set_ylabel("box mean\n[kg m⁻² d⁻¹]", fontsize=14)
-    ax.tick_params(axis="x", rotation=30, labelsize=12)
-    ax.tick_params(axis="y", labelsize=12)
-    ax.grid(axis="y", alpha=0.3)
+def _map_figure():
+    """Full-page map figure with a single cartopy axis."""
+    fig = plt.figure(figsize=(16, 8), constrained_layout=True)
+    ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
+    return fig, ax
 
 
 def draw_abs(day, out_png):
     tp_day = float(tp_basin_mean.sel(time=day))
-    fig = plt.figure(figsize=(16, 10), constrained_layout=True)
-    gs = fig.add_gridspec(2, 1, height_ratios=[5, 1], hspace=0.02)
-    ax = fig.add_subplot(gs[0], projection=ccrs.PlateCarree())
+    fig, ax = _map_figure()
     da = e_abs.sel(time=day)
     mesh = ax.pcolormesh(
         da.longitude, da.latitude, da.where(da > 0),
@@ -227,22 +221,18 @@ def draw_abs(day, out_png):
     )
     _base_map(ax)
     ax.set_title(
-        f"{day}  |  box mean tagged precip = {tp_day:.1f} kg m⁻² day⁻¹  |  "
-        f"absolute source"
+        f"{day}  |  box mean tagged precip = {tp_day:.1f} kg m⁻² day⁻¹"
     )
-    cb = fig.colorbar(mesh, ax=ax, shrink=0.75, pad=0.02)
+    cb = fig.colorbar(mesh, ax=ax, shrink=0.8, pad=0.02)
     cb.set_label("Tracked evaporation (precip-weighted)  [kg m⁻² day⁻¹]")
     cb.ax.tick_params(labelsize=14)
-    _tp_bar(fig.add_subplot(gs[1]), day)
     fig.savefig(out_png, dpi=300, pad_inches=0.1, facecolor="white")
     plt.close(fig)
 
 
 def draw_pdf(day, out_png):
     tp_day = float(tp_basin_mean.sel(time=day))
-    fig = plt.figure(figsize=(16, 10), constrained_layout=True)
-    gs = fig.add_gridspec(2, 1, height_ratios=[5, 1], hspace=0.02)
-    ax = fig.add_subplot(gs[0], projection=ccrs.PlateCarree())
+    fig, ax = _map_figure()
     da = e_pdf.sel(time=day)
     mesh = ax.pcolormesh(
         da.longitude, da.latitude, da.where(da > 0),
@@ -251,24 +241,19 @@ def draw_pdf(day, out_png):
     )
     _base_map(ax)
     ax.set_title(
-        f"{day}  |  box mean tagged precip = {tp_day:.1f} kg m⁻² day⁻¹  |  "
-        f"source PDF (area-weighted, ∫=1)"
+        f"{day}  |  box mean tagged precip = {tp_day:.1f} kg m⁻² day⁻¹"
     )
-    cb = fig.colorbar(mesh, ax=ax, shrink=0.75, pad=0.02)
-    cb.set_label("Source probability density  [dimensionless]")
+    cb = fig.colorbar(mesh, ax=ax, shrink=0.8, pad=0.02)
+    cb.set_label("Source PDF (area-weighted, ∫=1)  [dimensionless]")
     cb.ax.tick_params(labelsize=14)
-    _tp_bar(fig.add_subplot(gs[1]), day)
     fig.savefig(out_png, dpi=300, pad_inches=0.1, facecolor="white")
     plt.close(fig)
 
 
 def draw_cdf(day, out_png):
     tp_day = float(tp_basin_mean.sel(time=day))
-    fig = plt.figure(figsize=(16, 10), constrained_layout=True)
-    gs = fig.add_gridspec(2, 1, height_ratios=[5, 1], hspace=0.02)
-    ax = fig.add_subplot(gs[0], projection=ccrs.PlateCarree())
+    fig, ax = _map_figure()
     da = e_cdf.sel(time=day)
-    # Filled contours show the cumulative percentage "source shed" layers.
     cf = ax.contourf(
         da.longitude, da.latitude, da,
         levels=CDF_LEVELS + [100.0],
@@ -282,19 +267,51 @@ def draw_cdf(day, out_png):
     )
     _base_map(ax)
     ax.set_title(
-        f"{day}  |  box mean tagged precip = {tp_day:.1f} kg m⁻² day⁻¹  |  "
-        f"cumulative source percentile"
+        f"{day}  |  box mean tagged precip = {tp_day:.1f} kg m⁻² day⁻¹"
     )
-    cb = fig.colorbar(cf, ax=ax, shrink=0.75, pad=0.02,
+    cb = fig.colorbar(cf, ax=ax, shrink=0.8, pad=0.02,
                       ticks=CDF_LEVELS + [100])
     cb.set_label("Cumulative share of total tracked evaporation  [%]")
     cb.ax.tick_params(labelsize=14)
-    _tp_bar(fig.add_subplot(gs[1]), day)
     fig.savefig(out_png, dpi=300, pad_inches=0.1, facecolor="white")
     plt.close(fig)
 
 
-# ---------- render all frames ----------
+def draw_timeseries(out_png):
+    """Standalone time-series: basin-mean tagged precip for the full month.
+
+    A dashed red line marks the event onset (night of 2011-01-11, when the
+    landslide sequence in Nova Friburgo / Teresópolis began).
+    """
+    fig, ax = plt.subplots(figsize=(16, 4.5), constrained_layout=True)
+    ax.bar(tp_basin_mean.time.values, tp_basin_mean.values,
+           width=0.8, color="steelblue", edgecolor="black", linewidth=0.3)
+
+    # Mark the event onset with a vertical dashed line + annotation.
+    onset = np.datetime64(EVENT_ONSET)
+    ax.axvline(onset, color="crimson", linestyle="--", linewidth=2, zorder=5)
+    ax.annotate(
+        f"event onset\n{EVENT_ONSET}",
+        xy=(onset, TP_YMAX * 0.95), xytext=(10, -6),
+        textcoords="offset points",
+        color="crimson", fontsize=13, ha="left", va="top",
+    )
+
+    ax.set_ylim(0, TP_YMAX)
+    ax.set_ylabel("Box-mean tagged precipitation\n[kg m⁻² day⁻¹]")
+    ax.set_title(
+        "Tagged precipitation over the Serra do Mar box, January 2011"
+    )
+    ax.tick_params(axis="x", rotation=30)
+    ax.grid(axis="y", alpha=0.3)
+    fig.savefig(out_png, dpi=300, pad_inches=0.1, facecolor="white")
+    plt.close(fig)
+
+
+# ---------- render all frames + standalone time series ----------
+draw_timeseries(OUT_TS)
+print(f"  time-series -> {OUT_TS}")
+
 for d in days:
     draw_abs(d, OUT_ABS / f"{d}.png")
     draw_pdf(d, OUT_PDF / f"{d}.png")
@@ -302,3 +319,4 @@ for d in days:
     print(f"  {d}")
 
 print(f"\ndone. {len(days)} frames × 3 views in outputs/box_{{abs,pdf,cdf}}/")
+print(f"monthly context in {OUT_TS}")
