@@ -1,0 +1,13 @@
+data/
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+sync_shp_from_lorenz.sh
+
+# Local editor / tooling
+.claude/
+.vscode/
+
+# Generated outputs (re-producible from scripts)
+outputs/
