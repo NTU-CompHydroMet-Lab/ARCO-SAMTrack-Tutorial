@@ -204,8 +204,13 @@ def _base_map(ax):
 
 
 def _map_figure():
-    """Full-page map figure with a single cartopy axis."""
-    fig = plt.figure(figsize=(16, 8), constrained_layout=True)
+    """Half-page map figure (8 inch wide, per project convention).
+
+    The tracking domain is 65° × 75° (lon × lat), aspect ≈ 0.87, so a square-ish
+    half-page figure fills the canvas without whitespace. Full-page 16-inch
+    figures are reserved for stacked multi-panel or wide time-series layouts.
+    """
+    fig = plt.figure(figsize=(8, 9), constrained_layout=True)
     ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
     return fig, ax
 
