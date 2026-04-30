@@ -1,0 +1,37 @@
+# CITATION.cff — TODO: update once paper is accepted.
+#
+# When the AguaTrack-ARCO-SA data paper is published, fill in `title`,
+# `authors`, `doi`, `version`, `date-released`, and any
+# preferred-citation fields below.
+# See https://citation-file-format.github.io/ for the schema.
+
+cff-version: 1.2.0
+message: "If you use this tutorial repository or the AguaTrack-ARCO-SA dataset, please cite the data paper (TBD)."
+title: "AguaTrack-ARCO-SA Tutorial — TODO: update title once paper is final"
+abstract: >-
+  Companion notebooks for the AguaTrack-ARCO-SA dataset (WAM2Layers
+  backward moisture-tracking output over South America, 0.25° daily,
+  1990–2019).
+  Six Colab-runnable tutorials reproduce the data-paper figures: a
+  flash-flood event analysis (Serra do Mar 2011), a precipitationshed
+  climatology (Santa Cruz, Bolivia), ENSO-phase source composites
+  (Central Chile), the collapse of Aculeo Lake, and the Central-Chile
+  megadrought decade.
+authors:
+  # TODO: replace with the final author list.
+  - family-names: "TODO"
+    given-names: "TODO"
+    affiliation: "NTU CompHydroMet Lab"
+type: software
+license: MIT
+version: "0.1.0"
+# date-released: TODO
+# doi: TODO
+# repository-code: TODO
+# preferred-citation:
+#   type: article
+#   title: TODO
+#   authors: TODO
+#   journal: TODO
+#   year: TODO
+#   doi: TODO

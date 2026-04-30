@@ -1,4 +1,8 @@
-data/
+# Local data archives — too large for git. The HydroBASINS basin
+# shapefile (3.6 MB) is whitelisted below; it ships with the repo so
+# Colab users can download it for the basin overlay in notebook 02.
+data/*
+!data/hybas_sa_lev02_v1c/
 .venv/
 __pycache__/
 *.pyc
@@ -8,6 +12,19 @@ sync_shp_from_lorenz.sh
 # Local editor / tooling
 .claude/
 .vscode/
+.jupyter/
 
-# Generated outputs (re-producible from scripts)
+# Generated outputs (re-produced by running the notebooks)
 outputs/
+
+# Local-only sources. The .ipynb files in notebooks/ are the public
+# entry points for Colab; paired .py files (jupytext source) and the
+# CLI helper scripts under script/ stay on the author's workstation.
+# Whitelist the build helper that the README references.
+*.py
+!tools/strip_jupytext_header.py
+
+# Lock file pins exact resolved transitive deps. We pin direct deps in
+# pyproject.toml instead so contributors stay reproducible without
+# committing a ~250 KB lock file that churns on every uv sync.
+uv.lock

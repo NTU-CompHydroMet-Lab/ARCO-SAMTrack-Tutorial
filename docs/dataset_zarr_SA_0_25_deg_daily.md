@@ -3,7 +3,8 @@
 WAM2Layers (v3.3.1) backward moisture-tracking output over South America,
 0.25° daily resolution, 1990–2019.
 
-- **Path on hinton**: `/cache/isaacgbhk/Work/i_wam/output/zarr_SA_0_25_deg_daily_1990_2020/`
+- **Distribution**: [`AguaTrack/AguaTrack-ARCO-SA`](https://huggingface.co/datasets/AguaTrack/AguaTrack-ARCO-SA)
+  on HuggingFace, under the `AguaTrack_ARCO_SA_daily/` sub-directory.
 - **Layout**: 30 per-year zarr stores (`1990.zarr` … `2019.zarr`), Zarr v3, blosc/zstd + bitshuffle
 - **Total size on disk**: ~7.6 TB compressed (uncompressed float32 would be ~260 TB for the three 4-D variables)
 
@@ -14,14 +15,22 @@ import xarray as xr
 
 # one year
 ds = xr.open_zarr(
-    "/cache/isaacgbhk/Work/i_wam/output/zarr_SA_0_25_deg_daily_1990_2020/2011.zarr"
+    "hf://datasets/AguaTrack/AguaTrack-ARCO-SA/AguaTrack_ARCO_SA_daily/2011.zarr",
+    storage_options={"revision": "main"},
 )
 
 # all 30 years
-from glob import glob
-paths = sorted(glob("/cache/isaacgbhk/Work/i_wam/output/zarr_SA_0_25_deg_daily_1990_2020/*.zarr"))
-ds_all = xr.open_mfdataset(paths, engine="zarr", parallel=True)
+years = range(1990, 2020)
+ds_all = xr.concat(
+    [xr.open_zarr(f"hf://datasets/AguaTrack/AguaTrack-ARCO-SA/AguaTrack_ARCO_SA_daily/{y}.zarr",
+                  storage_options={"revision": "main"})
+     for y in years],
+    dim="time",
+)
 ```
+
+For local users with the archive on disk, swap the URLs for filesystem
+paths and drop `storage_options`.
 
 ## Schema (per year)
 
@@ -32,8 +41,8 @@ Coordinates:
   * tagging_mask   (tagging_mask) int32           0 … 25185
     tag_lat        (tagging_mask) float32         lat of each tag cell
     tag_lon        (tagging_mask) float32         lon of each tag cell
-  * latitude       (latitude)     float32         +15.0 → -60.0   [DESCENDING]
-  * longitude      (longitude)    float32         -90.0 → -25.0   [ascending]
+  * latitude       (latitude)     float32         +15.0 -> -60.0   [DESCENDING]
+  * longitude      (longitude)    float32         -90.0 -> -25.0   [ascending]
 Data variables:
     e_track        (time, tagging_mask, latitude, longitude)  float32
     gains          (time, tagging_mask, latitude, longitude)  float32
@@ -93,9 +102,8 @@ To find the tag for a real-world location, search `tag_lat / tag_lon` for the
 nearest cell:
 
 ```python
-tag_lat = ds.tag_lat.compute().values
-tag_lon = ds.tag_lon.compute().values
-i = int(np.argmin((tag_lat - TARGET_LAT)**2 + (tag_lon - TARGET_LON)**2))
+dist_sq = (ds.tag_lat - TARGET_LAT) ** 2 + (ds.tag_lon - TARGET_LON) ** 2
+i = int(dist_sq.argmin())
 ```
 
 ### 2. Analysis should be tag-first, time/space-second
@@ -104,8 +112,8 @@ Because chunks bundle `(full year × 10 tags × full map)`, an analysis pattern
 of "pick a tag, look at its full time/space source field" is effectively free,
 while "give me 2011-01-12 across all tags" is the worst case.
 
-- ✅ `ds.e_track.isel(tagging_mask=i)` → one chunk
-- ❌ `ds.e_track.sel(time="2011-01-12")` → touches all 2519 chunks
+- YES: `ds.e_track.isel(tagging_mask=i)` reads one chunk
+- NO:  `ds.e_track.sel(time="2011-01-12")` touches all 2519 chunks
 
 ### 3. Lazy by default — never `.load()` before selecting
 
@@ -158,10 +166,10 @@ rain. Use it to:
 - Detect secondary events in your "before" / "after" buffer
 - Normalize source maps by tagged rain amount if you want unitless maps
 
-## Companion data on hinton
+## Companion data
 
 - `data/hybas_sa_lev02_v1c/` — HydroBASINS level-2 polygons for South America
-  (synced from lorenz). Useful for overlay / regionmask-ing moisture source
+  Useful for overlay / regionmask-ing moisture source
   maps by basin.
 - Aggregated stores also present locally but not yet inspected:
   - `zarr_SA_0_25_deg_monthly_1990_2020/`
