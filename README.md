@@ -1,5 +1,9 @@
 # AguaTrack-ARCO-SA Tutorial
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
+[![Dataset: AguaTrack-ARCO-SA](https://img.shields.io/badge/dataset-AguaTrack--ARCO--SA-yellow)](https://huggingface.co/datasets/AguaTrack/AguaTrack-ARCO-SA)
+
 Companion code release for the **AguaTrack-ARCO-SA** dataset — WAM2Layers
 (v3.3.1) backward moisture-tracking output over South America at 0.25°
 daily resolution, 1990–2019. The dataset is published on HuggingFace at
