@@ -23,7 +23,7 @@ open the Colab link in its row, run all cells, and you get the figure.
 | 01 | Serra do Mar 2011 flash-flood event | SE Brazil | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/01_event_serra_do_mar_2011.ipynb) |
 | 02 | The "aerial river" feeding Santa Cruz | Bolivia (Amazon source) | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/02_aerial_river_santa_cruz.ipynb) |
 | 03 | ENSO-phase composites of moisture sources | Central Chile | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/03_enso_composites.ipynb) |
-| 05 | Central-Chile megadrought decade | Central Chile | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/05_megadrought_central_chile.ipynb) |
+| 04 | Central-Chile megadrought decade | Central Chile | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/04_megadrought_central_chile.ipynb) |
 
 ## Getting started
 
@@ -56,7 +56,7 @@ in each notebook's Step 1 cell with filesystem paths and drop the
 │   ├── 01_event_serra_do_mar_2011.ipynb
 │   ├── 02_aerial_river_santa_cruz.ipynb
 │   ├── 03_enso_composites.ipynb
-│   └── 05_megadrought_central_chile.ipynb
+│   └── 04_megadrought_central_chile.ipynb
 ├── docs/                       # dataset schema documentation
 ├── tools/                      # build helpers
 ├── pyproject.toml              # pinned dependency versions
