@@ -1,13 +1,13 @@
-# CITATION.cff — TODO: update once paper is accepted.
+# CITATION.cff
 #
-# When the AguaTrack-ARCO-SA data paper is published, fill in `title`,
-# `authors`, `doi`, `version`, `date-released`, and any
-# preferred-citation fields below.
+# Repository DOI is minted by Zenodo on the first GitHub release
+# (planned: v1.0.0). Until then `doi:` is a placeholder. The data paper
+# entry under `references` will be filled in once it is accepted.
 # See https://citation-file-format.github.io/ for the schema.
 
 cff-version: 1.2.0
-message: "If you use this tutorial repository or the AguaTrack-ARCO-SA dataset, please cite the data paper (TBD)."
-title: "AguaTrack-ARCO-SA Tutorial — TODO: update title once paper is final"
+message: "If you use this tutorial repository, please cite both this repository and the AguaTrack-ARCO-SA dataset."
+title: "AguaTrack-ARCO-SA Tutorial"
 abstract: >-
   Companion notebooks for the AguaTrack-ARCO-SA dataset (WAM2Layers
   backward moisture-tracking output over South America, 0.25° daily,
@@ -26,13 +26,19 @@ authors:
 type: software
 license: MIT
 version: "0.1.0"
-# date-released: TODO
-# doi: TODO
-# repository-code: TODO
-# preferred-citation:
-#   type: article
-#   title: TODO
-#   authors: TODO
-#   journal: TODO
-#   year: TODO
-#   doi: TODO
+repository-code: "https://github.com/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial"
+# date-released: TODO — set to the GitHub release date
+# doi: TODO — Zenodo DOI assigned on first release
+references:
+  - type: data
+    title: "AguaTrack-ARCO-SA: Analysis-Ready Cloud-Optimized South American Moisture Tracking Dataset"
+    authors:
+      - family-names: "Lin"
+        given-names: "Sung Che"
+        affiliation: "NTU CompHydroMet Lab"
+      - family-names: "Hung"
+        given-names: "Ho Tin"
+        affiliation: "NTU CompHydroMet Lab"
+    doi: "10.57967/hf/8650"
+    url: "https://huggingface.co/datasets/AguaTrack/AguaTrack-ARCO-SA"
+    repository: "https://huggingface.co/datasets/AguaTrack/AguaTrack-ARCO-SA"

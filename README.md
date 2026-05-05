@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
 [![Dataset: AguaTrack-ARCO-SA](https://img.shields.io/badge/dataset-AguaTrack--ARCO--SA-yellow)](https://huggingface.co/datasets/AguaTrack/AguaTrack-ARCO-SA)
+[![Dataset DOI](https://img.shields.io/badge/dataset%20DOI-10.57967%2Fhf%2F8650-blue)](https://doi.org/10.57967/hf/8650)
 
 Companion code release for the **AguaTrack-ARCO-SA** dataset — WAM2Layers
 (v3.3.1) backward moisture-tracking output over South America at 0.25°
@@ -67,11 +68,32 @@ in each notebook's Step 1 cell with filesystem paths and drop the
 
 ## How to cite
 
-> **TODO — paper in submission.** A BibTeX entry, DOI link, and Zenodo
-> archive link will appear here once the data paper is accepted.
+If you use this tutorial repository, please cite both the dataset and
+this repository.
 
-For now, please reference the AguaTrack dataset and this tutorial
-repository by URL.
+**Dataset** — AguaTrack-ARCO-SA on HuggingFace
+([`10.57967/hf/8650`](https://doi.org/10.57967/hf/8650)):
+
+```bibtex
+@dataset{aguatrack_arco_sa,
+  author    = {Lin, Sung Che and Hung, Ho Tin},
+  title     = {{AguaTrack-ARCO-SA: Analysis-Ready Cloud-Optimized South
+               American Moisture Tracking Dataset}},
+  publisher = {Hugging Face},
+  doi       = {10.57967/hf/8650},
+  url       = {https://huggingface.co/datasets/AguaTrack/AguaTrack-ARCO-SA},
+}
+```
+
+Monthly and yearly aggregates derived from this dataset are published
+at
+[`AguaTrackSA/AguaTrack-ARCO-SA-Aggregated`](https://huggingface.co/datasets/AguaTrackSA/AguaTrack-ARCO-SA-Aggregated)
+for convenience and share the dataset DOI above.
+
+**This repository** — Zenodo DOI is assigned on the first GitHub
+release (planned: `v1.0.0`). Once minted, the BibTeX entry will appear
+here. The companion data paper is in submission and will be added to
+the citation list once accepted.
 
 ## License
 
