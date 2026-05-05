@@ -6,7 +6,7 @@
 # See https://citation-file-format.github.io/ for the schema.
 
 cff-version: 1.2.0
-message: "If you use this tutorial repository, please cite both this repository and the AguaTrack-ARCO-SA dataset."
+message: "If you use this tutorial repository, please cite it via the Zenodo DOI assigned on release. To cite the AguaTrack-ARCO-SA dataset itself, see the dataset card on HuggingFace."
 title: "AguaTrack-ARCO-SA Tutorial"
 abstract: >-
   Companion notebooks for the AguaTrack-ARCO-SA dataset (WAM2Layers

@@ -68,32 +68,20 @@ in each notebook's Step 1 cell with filesystem paths and drop the
 
 ## How to cite
 
-If you use this tutorial repository, please cite both the dataset and
-this repository.
+**This repository (tutorial / code).** Zenodo DOI is assigned on the
+first GitHub release (planned: `v1.0.0`). Once minted, the BibTeX entry
+will appear here.
 
-**Dataset** — AguaTrack-ARCO-SA on HuggingFace
-([`10.57967/hf/8650`](https://doi.org/10.57967/hf/8650)):
-
-```bibtex
-@dataset{aguatrack_arco_sa,
-  author    = {Lin, Sung Che and Hung, Ho Tin},
-  title     = {{AguaTrack-ARCO-SA: Analysis-Ready Cloud-Optimized South
-               American Moisture Tracking Dataset}},
-  publisher = {Hugging Face},
-  doi       = {10.57967/hf/8650},
-  url       = {https://huggingface.co/datasets/AguaTrack/AguaTrack-ARCO-SA},
-}
-```
-
-Monthly and yearly aggregates derived from this dataset are published
-at
+**Dataset.** Cite the AguaTrack-ARCO-SA dataset directly from
+HuggingFace — the dataset card has its own canonical citation block:
+[`AguaTrack/AguaTrack-ARCO-SA`](https://huggingface.co/datasets/AguaTrack/AguaTrack-ARCO-SA)
+([DOI: `10.57967/hf/8650`](https://doi.org/10.57967/hf/8650)). The
+monthly and yearly aggregates at
 [`AguaTrackSA/AguaTrack-ARCO-SA-Aggregated`](https://huggingface.co/datasets/AguaTrackSA/AguaTrack-ARCO-SA-Aggregated)
-for convenience and share the dataset DOI above.
+are derived from the daily store and share the same DOI.
 
-**This repository** — Zenodo DOI is assigned on the first GitHub
-release (planned: `v1.0.0`). Once minted, the BibTeX entry will appear
-here. The companion data paper is in submission and will be added to
-the citation list once accepted.
+**Data paper.** In submission. The reference will be added here once it
+is accepted.
 
 ## License
 
