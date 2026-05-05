@@ -19,11 +19,11 @@ field for the Serra do Mar 2011 flash-flood event (notebook 01). The
 source contracts from a continental-scale plume to a local Atlantic
 patch as the system matures and dissipates.*
 
+## Notebook index
+
 This repository hosts five Colab-runnable Jupyter notebooks that reproduce
 the science figures in the data paper. Each notebook is self-contained —
 open the Colab link in its row, run all cells, and you get the figure.
-
-## Notebook index
 
 | # | Story | Region | Open in Colab |
 |---|---|---|---|
