@@ -1,12 +1,12 @@
 # CITATION.cff
 #
-# Repository DOI is minted by Zenodo on the first GitHub release
-# (planned: v1.0.0). Until then `doi:` is a placeholder. The data paper
-# entry under `references` will be filled in once it is accepted.
+# To cite the AguaTrack-ARCO-SA dataset itself, see the dataset card on
+# HuggingFace. The data paper entry under `references` will be added
+# once it is accepted.
 # See https://citation-file-format.github.io/ for the schema.
 
 cff-version: 1.2.0
-message: "If you use this tutorial repository, please cite it via the Zenodo DOI assigned on release. To cite the AguaTrack-ARCO-SA dataset itself, see the dataset card on HuggingFace."
+message: "If you use this tutorial repository, please cite it via the Zenodo DOI below. To cite the AguaTrack-ARCO-SA dataset itself, see the dataset card on HuggingFace."
 title: "AguaTrack-ARCO-SA Tutorial"
 abstract: >-
   Companion notebooks for the AguaTrack-ARCO-SA dataset (WAM2Layers
@@ -26,9 +26,10 @@ authors:
 type: software
 license: MIT
 version: "0.1.0"
+date-released: "2026-05-05"
+doi: "10.5281/zenodo.20036507"
 repository-code: "https://github.com/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial"
-# date-released: TODO — set to the GitHub release date
-# doi: TODO — Zenodo DOI assigned on first release
+url: "https://doi.org/10.5281/zenodo.20036507"
 references:
   - type: data
     title: "AguaTrack-ARCO-SA: Analysis-Ready Cloud-Optimized South American Moisture Tracking Dataset"

@@ -4,6 +4,7 @@
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
 [![Dataset: AguaTrack-ARCO-SA](https://img.shields.io/badge/dataset-AguaTrack--ARCO--SA-yellow)](https://huggingface.co/datasets/AguaTrack/AguaTrack-ARCO-SA)
 [![Dataset DOI](https://img.shields.io/badge/dataset%20DOI-10.57967%2Fhf%2F8650-blue)](https://doi.org/10.57967/hf/8650)
+[![Repo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20036507.svg)](https://doi.org/10.5281/zenodo.20036507)
 
 Companion code release for the **AguaTrack-ARCO-SA** dataset — WAM2Layers
 (v3.3.1) backward moisture-tracking output over South America at 0.25°
@@ -75,9 +76,20 @@ in each notebook's Step 1 cell with filesystem paths and drop the
 
 ## How to cite
 
-**This repository (tutorial / code).** Zenodo DOI is assigned on the
-first GitHub release (planned: `v1.0.0`). Once minted, the BibTeX entry
-will appear here.
+**Companion code** — archived on Zenodo
+([DOI: `10.5281/zenodo.20036507`](https://doi.org/10.5281/zenodo.20036507)):
+
+```bibtex
+@software{aguatrack_arco_sa_tutorial_v0_1_0,
+  author    = {Lin, Sung Che and Hung, Ho Tin},
+  title     = {{AguaTrack-ARCO-SA Tutorial}},
+  version   = {v0.1.0},
+  date      = {2026-05-05},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.20036507},
+  url       = {https://doi.org/10.5281/zenodo.20036507},
+}
+```
 
 **Dataset.** Cite the AguaTrack-ARCO-SA dataset directly from
 HuggingFace — the dataset card has its own canonical citation block:
