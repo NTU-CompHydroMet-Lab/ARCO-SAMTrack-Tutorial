@@ -130,12 +130,12 @@ def build_montage(field: xr.DataArray) -> None:
         title = f"{label}\n{date_pretty}"
         style_ax(ax, title, draw_y=col_idx == 0)
 
-    fig.subplots_adjust(bottom=0.14, wspace=0.05)
+    fig.subplots_adjust(top=0.85, bottom=0.14, wspace=0.05)
     cbar_ax = fig.add_axes([0.15, 0.04, 0.7, 0.025])
     fig.colorbar(cf, cax=cbar_ax, orientation="horizontal",
                  label="Tracked moisture source (kg m⁻² day⁻¹)")
     fig.suptitle("Daily evolution — Serra do Mar 2011 flash-flood event",
-                 fontsize=14)
+                 fontsize=14, y=0.97)
 
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(OUT_PATH, bbox_inches="tight", dpi=150)
