@@ -1,7 +1,7 @@
 [project]
-name = "arco-samtrack-tutorial"
+name = "aguatrack-arco-sa-tutorial"
 version = "0.1.0"
-description = "Tutorial notebooks for the SAMTrack moisture-tracking dataset (WAM2Layers backward tracking, South America, 0.25 degree daily, 1990-2019)."
+description = "Tutorial notebooks for the AguaTrack-ARCO-SA dataset (WAM2Layers backward moisture-tracking, South America, 0.25 degree daily, 1990-2019)."
 readme = "README.md"
 requires-python = ">=3.11"
 # Versions below pin the exact stack the notebooks were authored
