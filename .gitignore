@@ -23,6 +23,7 @@ outputs/
 # Whitelist the build helper that the README references.
 *.py
 !tools/strip_jupytext_header.py
+!tools/build_readme_hero_gif.py
 
 # Lock file pins exact resolved transitive deps. We pin direct deps in
 # pyproject.toml instead so contributors stay reproducible without
