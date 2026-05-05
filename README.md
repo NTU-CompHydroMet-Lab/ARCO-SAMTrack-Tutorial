@@ -102,5 +102,7 @@ the citation list once accepted.
 
 ## Dataset documentation
 
-See [`docs/dataset_zarr_SA_0_25_deg_daily.md`](docs/dataset_zarr_SA_0_25_deg_daily.md)
-for the daily zarr schema, chunk layout, and access-pattern guidance.
+- [`docs/dataset_daily.md`](docs/dataset_daily.md) — daily zarr schema,
+  chunk layout, and access-pattern guidance.
+- [`docs/dataset_aggregated.md`](docs/dataset_aggregated.md) — monthly
+  and yearly aggregate stores (used by notebooks 02–04).

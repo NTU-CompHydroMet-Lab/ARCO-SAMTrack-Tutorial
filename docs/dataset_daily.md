@@ -1,12 +1,15 @@
-# Dataset: `zarr_SA_0_25_deg_daily_1990_2020`
+# Dataset: AguaTrack-ARCO-SA (daily)
 
 WAM2Layers (v3.3.1) backward moisture-tracking output over South America,
 0.25° daily resolution, 1990–2019.
 
 - **Distribution**: [`AguaTrack/AguaTrack-ARCO-SA`](https://huggingface.co/datasets/AguaTrack/AguaTrack-ARCO-SA)
   on HuggingFace, under the `AguaTrack_ARCO_SA_daily/` sub-directory.
+- **DOI**: [`10.57967/hf/8650`](https://doi.org/10.57967/hf/8650)
 - **Layout**: 30 per-year zarr stores (`1990.zarr` … `2019.zarr`), Zarr v3, blosc/zstd + bitshuffle
 - **Total size on disk**: ~7.6 TB compressed (uncompressed float32 would be ~260 TB for the three 4-D variables)
+- **Aggregated companions**: see [`dataset_aggregated.md`](dataset_aggregated.md)
+  for the consolidated monthly + yearly stores derived from this one
 
 ## Opening
 
@@ -168,9 +171,11 @@ rain. Use it to:
 
 ## Companion data
 
-- `data/hybas_sa_lev02_v1c/` — HydroBASINS level-2 polygons for South America
-  Useful for overlay / regionmask-ing moisture source
-  maps by basin.
-- Aggregated stores also present locally but not yet inspected:
-  - `zarr_SA_0_25_deg_monthly_1990_2020/`
-  - `zarr_SA_0_25_deg_yearly_1990_2020/`
+- `data/hybas_sa_lev02_v1c/` — HydroBASINS level-2 polygons for South America.
+  Useful for overlay / regionmask-ing moisture source maps by basin.
+- **Aggregated stores** — monthly and yearly sums derived from the daily
+  store. See [`dataset_aggregated.md`](dataset_aggregated.md) for layout
+  and access patterns. Use these instead of the daily store whenever
+  your analysis only needs sub-annual or annual resolution; they're
+  ~30–360× smaller per chunk and avoid the "tag-first" tax of the daily
+  layout.
