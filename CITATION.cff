@@ -1,0 +1,44 @@
+# CITATION.cff
+#
+# Repository DOI is minted by Zenodo on the first GitHub release
+# (planned: v1.0.0). Until then `doi:` is a placeholder. The data paper
+# entry under `references` will be filled in once it is accepted.
+# See https://citation-file-format.github.io/ for the schema.
+
+cff-version: 1.2.0
+message: "If you use this tutorial repository, please cite it via the Zenodo DOI assigned on release. To cite the AguaTrack-ARCO-SA dataset itself, see the dataset card on HuggingFace."
+title: "AguaTrack-ARCO-SA Tutorial"
+abstract: >-
+  Companion notebooks for the AguaTrack-ARCO-SA dataset (WAM2Layers
+  backward moisture-tracking output over South America, 0.25° daily,
+  1990–2019).
+  Five Colab-runnable tutorials reproduce the data-paper figures: a
+  flash-flood event analysis (Serra do Mar 2011), a precipitationshed
+  climatology (Santa Cruz, Bolivia), ENSO-phase source composites
+  (Central Chile), and the Central-Chile megadrought decade.
+authors:
+  - family-names: "Lin"
+    given-names: "Sung Che"
+    affiliation: "NTU CompHydroMet Lab"
+  - family-names: "Hung"
+    given-names: "Ho Tin"
+    affiliation: "NTU CompHydroMet Lab"
+type: software
+license: MIT
+version: "0.1.0"
+repository-code: "https://github.com/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial"
+# date-released: TODO — set to the GitHub release date
+# doi: TODO — Zenodo DOI assigned on first release
+references:
+  - type: data
+    title: "AguaTrack-ARCO-SA: Analysis-Ready Cloud-Optimized South American Moisture Tracking Dataset"
+    authors:
+      - family-names: "Lin"
+        given-names: "Sung Che"
+        affiliation: "NTU CompHydroMet Lab"
+      - family-names: "Hung"
+        given-names: "Ho Tin"
+        affiliation: "NTU CompHydroMet Lab"
+    doi: "10.57967/hf/8650"
+    url: "https://huggingface.co/datasets/AguaTrack/AguaTrack-ARCO-SA"
+    repository: "https://huggingface.co/datasets/AguaTrack/AguaTrack-ARCO-SA"
