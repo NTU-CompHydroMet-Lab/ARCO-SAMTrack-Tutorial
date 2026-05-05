@@ -17,9 +17,11 @@ abstract: >-
   climatology (Santa Cruz, Bolivia), ENSO-phase source composites
   (Central Chile), and the Central-Chile megadrought decade.
 authors:
-  # TODO: replace with the final author list.
-  - family-names: "TODO"
-    given-names: "TODO"
+  - family-names: "Lin"
+    given-names: "Sung-Che"
+    affiliation: "NTU CompHydroMet Lab"
+  - family-names: "Hung"
+    given-names: "Ho Tin"
     affiliation: "NTU CompHydroMet Lab"
 type: software
 license: MIT
