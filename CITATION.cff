@@ -12,10 +12,11 @@ abstract: >-
   Companion notebooks for the AguaTrack-ARCO-SA dataset (WAM2Layers
   backward moisture-tracking output over South America, 0.25° daily,
   1990–2019).
-  Five Colab-runnable tutorials reproduce the data-paper figures: a
+  Six Colab-runnable tutorials reproduce the data-paper figures: a
   flash-flood event analysis (Serra do Mar 2011), a precipitationshed
   climatology (Santa Cruz, Bolivia), ENSO-phase source composites
-  (Central Chile), and the Central-Chile megadrought decade.
+  (Central Chile), the Central-Chile megadrought decade, and a
+  monthly precipitationshed view of one city across a single year.
 authors:
   - family-names: "Lin"
     given-names: "Sung Che"

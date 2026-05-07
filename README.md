@@ -21,7 +21,7 @@ patch as the system matures and dissipates.*
 
 ## Notebook index
 
-This repository hosts five Colab-runnable Jupyter notebooks that reproduce
+This repository hosts six Colab-runnable Jupyter notebooks that reproduce
 the science figures in the data paper. Each notebook is self-contained —
 open the Colab link in its row, run all cells, and you get the figure.
 
@@ -32,6 +32,7 @@ open the Colab link in its row, run all cells, and you get the figure.
 | 02 | The "aerial river" feeding Santa Cruz | Bolivia (Amazon source) | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/02_aerial_river_santa_cruz.ipynb) |
 | 03 | ENSO-phase composites of moisture sources | Central Chile | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/03_enso_composites.ipynb) |
 | 04 | Central-Chile megadrought decade | Central Chile | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/04_megadrought_central_chile.ipynb) |
+| 05 | Monthly precipitationsheds for one city, one year | Santiago | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/05_yearly_moisture_metrics.ipynb) |
 
 ## Getting started
 
@@ -64,7 +65,8 @@ in each notebook's Step 1 cell with filesystem paths and drop the
 │   ├── 01_event_serra_do_mar_2011.ipynb
 │   ├── 02_aerial_river_santa_cruz.ipynb
 │   ├── 03_enso_composites.ipynb
-│   └── 04_megadrought_central_chile.ipynb
+│   ├── 04_megadrought_central_chile.ipynb
+│   └── 05_yearly_moisture_metrics.ipynb
 ├── docs/                       # dataset schema documentation
 ├── tools/                      # build helpers
 ├── pyproject.toml              # pinned dependency versions
@@ -111,4 +113,4 @@ is accepted.
 - [`docs/dataset_daily.md`](docs/dataset_daily.md) — daily zarr schema,
   chunk layout, and access-pattern guidance.
 - [`docs/dataset_aggregated.md`](docs/dataset_aggregated.md) — monthly
-  and yearly aggregate stores (used by notebooks 02–04).
+  and yearly aggregate stores (used by notebooks 02–05).
