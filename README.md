@@ -4,7 +4,6 @@
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
 [![Dataset: AguaTrack-ARCO-SA](https://img.shields.io/badge/dataset-AguaTrack--ARCO--SA-yellow)](https://huggingface.co/datasets/AguaTrack/AguaTrack-ARCO-SA)
 [![Dataset DOI](https://img.shields.io/badge/dataset%20DOI-10.57967%2Fhf%2F8650-blue)](https://doi.org/10.57967/hf/8650)
-[![Repo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20036507.svg)](https://doi.org/10.5281/zenodo.20036507)
 
 Companion code release for the **AguaTrack-ARCO-SA** dataset — WAM2Layers
 (v3.3.1) backward moisture-tracking output over South America at 0.25°
