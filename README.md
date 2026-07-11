@@ -29,10 +29,10 @@ open the Colab link in its row, run all cells, and you get the figure.
 |---|---|---|---|
 | 00 | Setup and dataset primer | — | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/00_setup_and_data.ipynb) |
 | 01 | Serra do Mar 2011 flash-flood event | SE Brazil | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/01_event_serra_do_mar_2011.ipynb) |
-| 02 | The "aerial river" feeding Santa Cruz | Bolivia (Amazon source) | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/02_aerial_river_santa_cruz.ipynb) |
-| 03 | ENSO-phase composites of moisture sources | Central Chile | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/03_enso_composites.ipynb) |
+| 02 | Continental "aerial rivers": six-city precipitationsheds | South America (6 cities) | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/02_aerial_rivers_precipitationsheds.ipynb) |
+| 03 | ENSO-phase composites of moisture sources | Central-south Chile | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/03_enso_composites.ipynb) |
 | 04 | Central-Chile megadrought decade | Central Chile | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/04_megadrought_central_chile.ipynb) |
-| 05 | Monthly precipitationsheds for one city, one year | Santiago | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/05_yearly_moisture_metrics.ipynb) |
+| 05 | Monthly precipitationsheds for one city, one year | Viedma, Patagonia | [open](https://colab.research.google.com/github/NTU-CompHydroMet-Lab/AguaTrack-ARCO-SA-Tutorial/blob/main/notebooks/05_yearly_moisture_metrics.ipynb) |
 
 ## Getting started
 
@@ -63,7 +63,7 @@ in each notebook's Step 1 cell with filesystem paths and drop the
 ├── notebooks/                  # Colab-runnable tutorials (one per story)
 │   ├── 00_setup_and_data.ipynb
 │   ├── 01_event_serra_do_mar_2011.ipynb
-│   ├── 02_aerial_river_santa_cruz.ipynb
+│   ├── 02_aerial_rivers_precipitationsheds.ipynb
 │   ├── 03_enso_composites.ipynb
 │   ├── 04_megadrought_central_chile.ipynb
 │   └── 05_yearly_moisture_metrics.ipynb
